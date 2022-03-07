@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.xyh.mall.dao.TypeBrandMapper">
+  <resultMap id="BaseResultMap" type="team.xyh.mall.pojo.TypeBrand">
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="brand" jdbcType="VARCHAR" property="brand" />
+  </resultMap>
+  <insert id="insert" parameterType="team.xyh.mall.pojo.TypeBrand">
+    insert into type_brand (type, brand)
+    values (#{type,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select type, brand
+    from type_brand
+  </select>
+  <select id="getAllType" resultType="java.lang.String">
+    SELECT distinct type FROM type_brand
+  </select>
+  <select id="getAllBrandByType" resultType="java.lang.String">
+    SELECT distinct brand FROM type_brand where type = #{type}
+  </select>
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.xyh.mall.dao.ShoppingCarMapper">
+<!--
+    <cache eviction="LRU" flushInterval="100000" readOnly="true" size="1024"/>
+-->
+    <insert id="addShoppingCar">
+        INSERT into shopping_car(user_id,good_id,number) VALUES (#{userId},#{goodId},1)
+    </insert>
+
+    <update id="changeNumber">
+        update shopping_car set number = #{number} where id =#{id}
+    </update>
+    <delete id="deleteThisGood">
+        delete from shopping_car where id=#{id};
+    </delete>
+    <!--<resultMap id="ShoppingCarResultMap" type="ShoppingCarView">
+        <id column="id" property="id" jdbcType="INTEGER"></id>
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+
+        <result column=""></result>
+    </resultMap>-->
+
+
+    <select id="viewShoppingCar" resultType="team.xyh.mall.dto.ShoppingCarView">
+        select shopping_car.id,user_id ,good_id,name,price, number,img_url from good,shopping_car
+        where shopping_car.good_id=good.id and shopping_car.user_id=#{userId};
+    </select>
+    <select id="allShoppingCarGood" resultType="java.lang.Integer">
+          select good_id from shopping_car where user_id=#{userId};
+    </select>
+    <select id="getOrder" resultType="team.xyh.mall.dto.OrderDto">
+        select oms_order_item.id,
+        product_name as name,
+        create_time, product_price as price ,
+        product_count as count,
+        product_pic as imgUrl
+        from oms_order,oms_order_item
+        where oms_order.id=oms_order_item.order_id
+        and user_id = #{userId}
+    </select>
+</mapper>

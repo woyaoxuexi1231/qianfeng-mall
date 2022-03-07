@@ -1,0 +1,25 @@
+server:
+    port: 8080
+spring:
+    resources:
+        static-locations: classpath:/META-INF/resources/, classpath:/resources/, classpath:/static/, classpath:/templates/,file:${web.upload-path}
+    mvc:
+        static-path-pattern: /image/**
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/mall?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
+        username: root
+        password: 123456
+mybatis:
+    type-aliases-package: team.xyh.mall.pojo
+    mapper-locations: classpath:mapper/*.xml
+    # spring boot集成mybatis的方式打印sql
+#logging:
+#    level:
+#        team.xyh.mall.dao: DEBUG
+app:
+    uploadFolder: E://uploadFiles/
+    previewPath: http://127.0.0.1:8080/image/
+web:
+    upload-path: E://uploadFiles/
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.xyh.mall.dao.DisplayMapper">
+    <!--<insert id="addShoppingCar">
+        INSERT into shopping_car(user_id,good_id,number) VALUES (#{userId},#{goodId},1)
+    </insert>-->
+
+    <!--<resultMap id="ShoppingCarResultMap" type="ShoppingCarView">
+        <id column="id" property="id" jdbcType="INTEGER"></id>
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+
+        <result column=""></result>
+    </resultMap>-->
+
+
+    <!--<select id="viewShoppingCar" resultType="ShoppingCarView">
+        select shopping_car.id,user_id ,good_id,name,price, number,img_url from good,shopping_car
+        where shopping_car.good_id=good.id and shopping_car.user_id=#{userId};
+    </select>-->
+<!--
+    <cache eviction="LRU" flushInterval="100000" readOnly="true" size="1024"/>
+-->
+
+    <select id="displayGoods" resultType="team.xyh.mall.dto.Good">
+        select id,name,price,stock,img_url from good where status= 1;
+    </select>
+    <select id="allShoppingCarGood" resultType="java.lang.Integer">
+        select good_id from shopping_car where user_id=#{userId};
+    </select>
+    <select id="getAllPoster" resultType="team.xyh.mall.dto.Poster">
+        select id,good_id,img_url from poster
+    </select>
+
+</mapper>
