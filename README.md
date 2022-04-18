@@ -10,10 +10,3 @@ and the project will not be updated now nor in the future
 ```
 vue | springboot 
 ```
-
-#### ps
-
-```
-I just recommend not to download
-```
-
